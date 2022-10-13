@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500;600;700&display=swap');
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -6,6 +8,7 @@
 body {
   height: 100vh;
   overflow-y: hidden;
+  font-family: 'Source Code Pro', monospace;
 }
 
 .container {
@@ -24,4 +27,11 @@ iframe {
   border: none;
   width: 100%;
   height: 100%;
+}
+
+.Layout {
+  background-color: rgb(39, 39, 42);
+  height: 100vh;
+  color:  #f3eae8;
+  padding-top: 4rem;
 }

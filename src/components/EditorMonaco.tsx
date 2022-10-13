@@ -2,7 +2,7 @@ import Editor, { OnMount } from '@monaco-editor/react'
 import { editor } from 'monaco-editor'
 import { Socket } from 'socket.io-client'
 import { Dispatch, MutableRefObject, SetStateAction, useRef } from 'react'
-import * as MonacoCollabText from '@convergencelabs/monaco-collab-ext'
+import {EditorContentManager} from '@convergencelabs/monaco-collab-ext'
 
 interface IEditorMonaco {
   language: string
@@ -21,13 +21,13 @@ export default function EditorMonaco({
   editorRef,
   setMounted
 }: IEditorMonaco) {
-  const contentManager = useRef<MonacoCollabText.EditorContentManager>()
+  const contentManager = useRef<EditorContentManager>()
 
   const handleDidMount: OnMount = (editor, monaco) => {
     editorRef.current = editor
     setMounted(true)
     if (socketClient !== null) {
-      contentManager.current = new MonacoCollabText.EditorContentManager({
+      contentManager.current = new EditorContentManager({
         editor: editorRef.current,
         onInsert(index, text) {
           console.log("insert", text)
