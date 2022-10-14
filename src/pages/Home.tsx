@@ -1,13 +1,10 @@
-import { Outlet, useLocation, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import './Home.css'
 
 export default function Home() {
-  let location = useLocation()
 
   return (
     <div className="Layout">
-      {location.pathname === '/' ? (
-        <>
           <h2>Welcome to my app</h2>
           <div className="home_content">
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste
@@ -24,10 +21,10 @@ export default function Home() {
             unde? Iure, rem enim! Nobis sit non ullam dicta quisquam illo.
           </div>
           <div className="button_container">
-            <Link className="button" to={'login'}>
+            <Link className="button" to={'/login'}>
               Login
             </Link>
-            <Link className="button" to={'signup'}>
+            <Link className="button" to={'/signup'}>
               Sign Up
             </Link>
           </div>
@@ -37,13 +34,6 @@ export default function Home() {
               here
             </a>
           </div>
-        </>
-      ) : (
-        <>
-          <h2>Login to start using the editor</h2>
-          <Outlet />
-        </>
-      )}
     </div>
   )
 }

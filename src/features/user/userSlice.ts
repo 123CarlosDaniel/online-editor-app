@@ -23,12 +23,17 @@ const userSlice = createSlice({
   reducers : {
     setUser(state,action:PayloadAction<userI>){
       const {userName,contacts,email,rooms,_id} = action.payload
-      state = {userName,contacts,email,rooms,_id}
+      // state = {userName,contacts,email,rooms,_id}
+      state._id = _id
+      state.userName = userName
+      state.contacts = contacts
+      state.email = email
+      state.rooms = rooms
     }
   }
 })
 
-export const selectAccessToken = (state:RootState) => state.user
+export const selectUser = (state:RootState) => state.user
 
 export const { setUser} = userSlice.actions
 export default userSlice.reducer

@@ -1,30 +1,44 @@
 import { ChangeEventHandler, FormEventHandler, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import fetcher from '../utils/fetcher'
-import {useDispatch} from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { setAuth } from '../features/auth/authSlice'
+import { setUser } from '../features/user/userSlice'
 
 export default function Login() {
   const [values, setValues] = useState({
     email: '',
     password: '',
   })
+  const [errorMsg, setErrorMsg] = useState('')
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const handleSubmit: FormEventHandler<HTMLFormElement> = async(e) => {
+  const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
-    console.log(values)
     let body = JSON.stringify(values)
-    const {data,error} =await fetcher({method:'POST',url:'http://localhost:3500/auth/login',body})
+    const { data, error } = await fetcher({
+      method: 'POST',
+      url: 'http://localhost:3500/auth/login',
+      body,
+    })
     if (error === null) {
-      dispatch(setAuth({accessToken:data.token}))
+      dispatch(setAuth({ accessToken: data.token }))
+      console.log({data})
+      const user = data.user
+      dispatch(setUser(user))
       navigate('/panel')
+      return
     }
+    let msg = RegExp('Bad').test(error) ? error : 'Something went wrong'
+    setErrorMsg(msg as string)
+    setTimeout(() => {
+      setErrorMsg('')
+    }, 3500)
   }
 
-  const handleChange:ChangeEventHandler<HTMLInputElement> = (e) => {
-    setValues( prev => ({...prev,[e.target.name]:e.target.value}))
+  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    setValues((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
   return (
@@ -63,6 +77,7 @@ export default function Login() {
       <Link className="link" to={'/'}>
         Go back to home
       </Link>
+      {errorMsg !== '' && <h2 className="errorMessage">{errorMsg}</h2>}
     </form>
   )
 }

@@ -35,3 +35,39 @@ iframe {
   color:  #f3eae8;
   padding-top: 4rem;
 }
+
+.errorMessage {
+  color: #fffbf4;
+  background-color: #931900;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  vertical-align: middle;
+  line-height: 1.5rem;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+}
+
+.button_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-block: 2rem;
+  gap: 1rem;
+}
+
+.button {
+  color: #cdd7ed;
+  text-decoration: none;
+  background-color: #18203e;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: background 0.5s ease-in-out;
+}
+
+.button:hover {
+  background-color: #6c55b6;
+  box-shadow: 0 0 8px #cdd7ed, 0 0 4px #a27de5 ;
+}

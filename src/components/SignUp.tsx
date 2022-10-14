@@ -1,16 +1,44 @@
 import { ChangeEventHandler, FormEventHandler, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import fetcher from '../utils/fetcher'
+import {useDispatch} from 'react-redux'
+import { setAuth } from '../features/auth/authSlice'
+import { setUser } from '../features/user/userSlice'
 
 export default function SignUp() {
   const [values, setValues] = useState({
-    name: '',
+    userName: '',
     email: '',
     password: '',
   })
+  const [errorMsg, setErrorMsg] = useState('')
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-  const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+
+  const handleSubmit: FormEventHandler<HTMLFormElement> = async(e) => {
     e.preventDefault()
-    console.log(values)
+    let body = JSON.stringify(values)
+    const {data,error} = await fetcher({
+      url: 'http://localhost:3500/auth/register',
+      method:'POST',
+      body,
+    })
+
+    if (error===null) {
+      dispatch(setAuth({accessToken:data.token}))
+      const user = data.user
+      dispatch(setUser(user))
+      navigate('/panel')
+      return
+    }
+    console.log(data)
+    let msg = RegExp('Bad').test(error)? 'Email is already used' : error
+    console.log({msg})
+    setErrorMsg(msg as string)
+    setTimeout(() => {
+      setErrorMsg('')
+    }, 3500)
   }
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -20,14 +48,14 @@ export default function SignUp() {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="name">Name</label>
+        <label htmlFor="userName">Username</label>
         <input
           type="text"
-          id="name"
-          name="name"
+          id="userName"
+          name="userName"
           autoFocus
           required
-          value={values.name}
+          value={values.userName}
           onChange={(e) => handleChange(e)}
         />
       </div>
@@ -64,6 +92,7 @@ export default function SignUp() {
       <Link className="link" to={'/'}>
         Go back to home
       </Link>
+      {errorMsg !== '' && <h2 className="errorMessage">{errorMsg}</h2>}
     </form>
   )
 }

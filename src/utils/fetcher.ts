@@ -6,7 +6,7 @@ interface fetcherParamsI {
 
 interface DataI {
   token : string
-  user : {contacts:string[], email : string, userName:string, _id : string}
+  user : {contacts:string[], email : string, userName:string, _id : string, rooms:string[]}
 }
 
 interface fetcherResolveI {

@@ -8,27 +8,6 @@
   padding: 0 8rem;
 }
 
-.button_container {
-  display: flex;
-  justify-content: center;
-  margin-block: 2rem;
-  gap: 1rem;
-}
-
-.button {
-  color: #cdd7ed;
-  text-decoration: none;
-  background-color: #18203e;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  transition: background 0.5s ease-in-out;
-}
-
-.button:hover {
-  background-color: #6c55b6;
-  box-shadow: 0 0 8px #cdd7ed, 0 0 4px #a27de5 ;
-}
-
 h2 {
   text-align: center;
   margin-bottom: 2rem;
