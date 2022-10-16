@@ -8,6 +8,7 @@ import Panel from './pages/Panel'
 import Auth from './pages/Auth'
 import Protected from './pages/Protected'
 import PersistLogin from './pages/PersistLogin'
+import NewRoom from './pages/NewRoom'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="signup" element={<SignUp />} />
         </Route>
           <Route path="/panel" element={<Panel />} />
+          <Route path='/newRoom' element={<NewRoom/>}/>
         <Route element={<Protected />}>
           <Route path="/editor" element={<EditorPage />} />
         </Route>
