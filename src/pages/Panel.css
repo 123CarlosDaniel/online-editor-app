@@ -1,0 +1,33 @@
+.panel_information {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+}
+
+.panel_information > div {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;  
+}
+
+.data_container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.data_container > div {
+  margin-bottom: 0.5rem;  
+}
+
+
+
+
+
+
+@media screen and (max-width : 768px) {
+  .panel_information {
+    flex-direction: column;
+    gap: 2rem;
+  }
+}

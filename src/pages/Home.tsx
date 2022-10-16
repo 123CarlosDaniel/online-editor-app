@@ -21,6 +21,9 @@ export default function Home() {
             unde? Iure, rem enim! Nobis sit non ullam dicta quisquam illo.
           </div>
           <div className="button_container">
+            <Link className='button' to={'/panel'}>
+              Panel
+            </Link>
             <Link className="button" to={'/login'}>
               Login
             </Link>
