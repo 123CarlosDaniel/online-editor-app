@@ -21,8 +21,8 @@ function App() {
         </Route>
           <Route path="/panel" element={<Panel />} />
           <Route path='/newRoom' element={<NewRoom/>}/>
+          <Route path="/editor/:roomName" element={<EditorPage />} />
         <Route element={<Protected />}>
-          <Route path="/editor" element={<EditorPage />} />
         </Route>
       </Route>
     </Routes>
