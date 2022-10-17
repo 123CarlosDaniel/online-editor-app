@@ -19,10 +19,10 @@ function App() {
           <Route index path="login" element={<Login />} />
           <Route path="signup" element={<SignUp />} />
         </Route>
+        <Route element={<Protected />}>
           <Route path="/panel" element={<Panel />} />
           <Route path='/newRoom' element={<NewRoom/>}/>
           <Route path="/editor/:roomName" element={<EditorPage />} />
-        <Route element={<Protected />}>
         </Route>
       </Route>
     </Routes>

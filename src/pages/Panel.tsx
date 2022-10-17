@@ -11,7 +11,7 @@ export default function Panel() {
   const selector = useSelector(selectAccessToken)
   const selectorUser = useSelector(selectUser)
 
-  // console.log(selectorUser)
+  console.log(selectorUser)
 
   
   return (

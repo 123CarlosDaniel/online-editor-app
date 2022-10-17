@@ -1,6 +1,6 @@
 import { ChangeEventHandler, FormEventHandler, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import fetcher from '../utils/fetcher'
+import fetcher, { DataI } from '../utils/fetcher'
 import {useDispatch} from 'react-redux'
 import { setAuth } from '../features/auth/authSlice'
 import { setUser } from '../features/user/userSlice'
@@ -19,7 +19,7 @@ export default function SignUp() {
   const handleSubmit: FormEventHandler<HTMLFormElement> = async(e) => {
     e.preventDefault()
     let body = JSON.stringify(values)
-    const {data,error} = await fetcher({
+    const {data,error} = await fetcher<DataI>({
       url: 'http://localhost:3500/auth/register',
       method:'POST',
       body,
