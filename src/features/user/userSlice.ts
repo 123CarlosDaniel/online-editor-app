@@ -23,7 +23,6 @@ const userSlice = createSlice({
   reducers : {
     setUser(state,action:PayloadAction<userI>){
       const {userName,contacts,email,rooms,_id} = action.payload
-      // state = {userName,contacts,email,rooms,_id}
       state._id = _id
       state.userName = userName
       state.contacts = contacts

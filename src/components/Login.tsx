@@ -24,7 +24,6 @@ export default function Login() {
     })
     if (error === null) {
       dispatch(setAuth({ accessToken: data.token }))
-      console.log({data})
       const user = data.user
       dispatch(setUser(user))
       navigate('/panel')

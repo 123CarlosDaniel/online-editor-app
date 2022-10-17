@@ -10,6 +10,7 @@ export default function useRefreshToken() {
     })
     const data = await res.json() //{token:accessToken}
     dispatch(setAuth({accessToken : data.token}))
+    return data.token
   }  
   return refresh
 }
