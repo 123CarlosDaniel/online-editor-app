@@ -26,7 +26,7 @@ export default function Home() {
         <Link className="button" to={'/panel'}>
           Panel
         </Link>
-        {(accessToken ==='') ? (
+        {(!accessToken) ? (
           <>
             <Link className="button" to={'/login'}>
               Login

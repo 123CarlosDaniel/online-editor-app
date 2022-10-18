@@ -13,7 +13,7 @@ export default function Privated() {
   if (params.roomId === path) path = '?id='+path
   if (params.roomName === path) path = '?name='+path
   useEffect(() => {
-    fetch(`http://localhost:3500/room/verify/${path}`,{
+    fetch(`http://localhost:3500/room/verify${path}`,{
       headers : {
         'Authorization' : 'Bearer ' + auth.accessToken,
         'Content-Type':'application/json',
