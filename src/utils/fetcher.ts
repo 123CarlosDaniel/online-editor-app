@@ -1,3 +1,5 @@
+import { UserI } from "../features/user/userSlice"
+
 interface fetcherParamsI {
   url : string
   method?: string
@@ -8,7 +10,7 @@ interface fetcherParamsI {
 // For fetcher in login and signup components
 export interface DataI {
   token : string
-  user : {contacts:string[], email : string, userName:string, _id : string, rooms:string[]}
+  user : UserI
 }
 
 export interface RoomI {

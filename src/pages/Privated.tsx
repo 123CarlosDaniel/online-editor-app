@@ -9,13 +9,11 @@ export default function Privated() {
   const [isLoading, setIsLoading] = useState(true)
   const [allowed, setAllowed] = useState(false)
   const auth = useSelector(selectAccessToken)
-
+  let path = params.roomId || params.roomName
+  if (params.roomId === path) path = '?id='+path
+  if (params.roomName === path) path = '?name='+path
   useEffect(() => {
-    fetch('http://localhost:3500/room/verify',{
-      method : 'POST',
-      body : JSON.stringify({
-        roomName : params.roomName
-      }),
+    fetch(`http://localhost:3500/room/verify/${path}`,{
       headers : {
         'Authorization' : 'Bearer ' + auth.accessToken,
         'Content-Type':'application/json',
@@ -29,10 +27,10 @@ export default function Privated() {
       }
     }).finally(()=>{
       setIsLoading(false)
-      console.log({allowed,params})
     }).catch(err=>{
       console.log(err)
     })
+    console.log({path})
   
   }, [])
   

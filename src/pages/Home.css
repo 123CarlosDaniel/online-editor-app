@@ -16,6 +16,16 @@ form {
   margin: 3rem auto;
 }
 
+.min_form {
+  width: 15rem;
+  gap: 1rem;
+  margin: 0;
+}
+
+.min_form input {
+  margin: 0;
+}
+
 input {
   display: block;
   margin-top: 0.75rem;

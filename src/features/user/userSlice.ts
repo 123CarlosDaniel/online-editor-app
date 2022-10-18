@@ -7,7 +7,7 @@ interface ContactI {
   email : string
 }
 
-interface userI {
+export interface UserI {
   userName : string
   contacts : ContactI[]
   rooms : Array<{
@@ -18,7 +18,7 @@ interface userI {
   _id : string
 }
 
-const initialState : userI = {
+const initialState : UserI = {
   userName : '',
   contacts : [],
   rooms : [],
@@ -30,7 +30,7 @@ const userSlice = createSlice({
   name : 'user',
   initialState,
   reducers : {
-    setUser(state,action:PayloadAction<userI>){
+    setUser(state,action:PayloadAction<UserI>){
       const {userName,contacts,email,rooms,_id} = action.payload
       state._id = _id
       state.userName = userName

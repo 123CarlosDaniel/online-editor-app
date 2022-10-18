@@ -12,7 +12,7 @@ export default function Rooms() {
           <h4>Name : {el.name}</h4>
           <div className="link_container">
           <Link to={`/editor/${el.name}`} className="link sm">Join</Link>
-          <Link to={`/editor/${el.name}`} className="link sm">Give access to </Link>
+          <Link to={`/access/${el.id}`} className="link sm">Give access to </Link>
           </div>
         </div>
       ))}

@@ -10,6 +10,7 @@ import Protected from './pages/Protected'
 import PersistLogin from './pages/PersistLogin'
 import NewRoom from './pages/NewRoom'
 import Privated from './pages/Privated'
+import AccessRoom from './pages/AccessRoom'
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path='/newRoom' element={<NewRoom/>}/>
           <Route element={<Privated/>}>
             <Route path="/editor/:roomName" element={<EditorPage />} />
+            <Route path="/access/:roomId" element={<AccessRoom />} />
           </Route>
         </Route>
       </Route>

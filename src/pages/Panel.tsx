@@ -5,6 +5,7 @@ import './Panel.css'
 import Rooms from '../components/Rooms'
 import Contacts from '../components/Contacts'
 import LogoutButton from '../components/LogoutButton'
+import AddContact from '../components/AddContact'
 
 export default function Panel() {
   const selectorUser = useSelector(selectUser)
@@ -27,6 +28,10 @@ export default function Panel() {
         <div>
           <h3>Your Contacts</h3>
           <Contacts />
+        </div>
+        <div>
+          <h3>Add Contact</h3>
+          <AddContact />
         </div>
       </div>
     </div>
