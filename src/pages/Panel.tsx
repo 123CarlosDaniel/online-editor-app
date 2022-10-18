@@ -10,7 +10,7 @@ export default function Panel() {
   const selectorUser = useSelector(selectUser)
   return (
     <div className="Layout">
-      <h2>Welcome to the user panel {selectorUser.userName.toLocaleUpperCase()}</h2>
+      <h2>Welcome to the user panel {selectorUser.userName.toUpperCase()}</h2>
       <div className="button_container">
         <Link className="button" to={'/'}>
           Principal

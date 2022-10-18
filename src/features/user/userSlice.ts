@@ -1,10 +1,19 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import { RootState } from '../../types'
 
+interface ContactI {
+  id : string
+  name : string
+  email : string
+}
+
 interface userI {
   userName : string
-  contacts : string[]
-  rooms : string[]
+  contacts : ContactI[]
+  rooms : Array<{
+    name : string
+    id : string
+  }>
   email : string
   _id : string
 }

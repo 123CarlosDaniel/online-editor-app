@@ -1,9 +1,12 @@
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { selectAccessToken } from "../features/auth/authSlice"
 import { setUser } from "../features/user/userSlice"
 
 export default function useRefreshUser() {
+  const token = useSelector(selectAccessToken)
+  const accessToken = token.accessToken
   const dispatch = useDispatch()
-  const refresh = async(token:string)=>{
+  const refresh = async(token = accessToken)=>{
     const res = await fetch('http://localhost:3500/users',{
       credentials : "include",
       headers : {

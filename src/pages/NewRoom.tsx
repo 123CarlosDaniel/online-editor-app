@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import LogoutButton from '../components/LogoutButton'
 import { selectAccessToken } from '../features/auth/authSlice'
+import useRefreshUser from '../hooks/useRefreshUser'
 import fetcher, { RoomI } from '../utils/fetcher'
 
 export default function NewRoom() {
@@ -10,6 +11,8 @@ export default function NewRoom() {
   const [errorMsg, setErrorMsg] = useState('')
   const navigate = useNavigate()
   const token = useSelector(selectAccessToken)
+  const refreshUser = useRefreshUser()
+
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
     let body = JSON.stringify({ name: value })
@@ -20,8 +23,8 @@ export default function NewRoom() {
       accessToken : 'Bearer ' + token.accessToken
     })
     if (error === null) {
-      console.log(data)
-      navigate(`/editor/${data.name}`)
+      await refreshUser()
+      navigate(`/panel`)
       return
     }
     let msg = RegExp('Bad').test(error) ? error : 'Something went wrong'

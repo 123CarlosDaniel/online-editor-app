@@ -36,6 +36,11 @@ iframe {
   padding-top: 4rem;
 }
 
+.link {
+  color: #a27de5;
+  text-decoration: none;
+}
+
 .errorMessage {
   color: #fffbf4;
   background-color: #931900;

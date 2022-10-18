@@ -24,6 +24,11 @@
   margin-bottom: 0.5rem;  
 }
 
+.link_container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
 @media screen and (max-width : 768px) {
   .panel_information {
     flex-direction: column;
