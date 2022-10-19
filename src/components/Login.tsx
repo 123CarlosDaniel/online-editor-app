@@ -29,7 +29,7 @@ export default function Login() {
       navigate('/panel')
       return
     }
-    let msg = RegExp('Bad').test(error) ? error : 'Something went wrong'
+    let msg = RegExp('Bad').test(error) ? 'Incorrect credentials' : 'Something went wrong'
     setErrorMsg(msg as string)
     setTimeout(() => {
       setErrorMsg('')

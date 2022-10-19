@@ -16,8 +16,10 @@ export default function Panel() {
         <Link className="button" to={'/'}>
           Principal
         </Link>
-        <Link className="button" to={'/newRoom'}>Create New Room</Link>
-        <LogoutButton/>
+        <Link className="button" to={'/newRoom'}>
+          Create New Room
+        </Link>
+        <LogoutButton />
       </div>
 
       <div className="panel_information">

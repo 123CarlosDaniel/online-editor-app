@@ -9,30 +9,29 @@ export default function AddContact() {
   const [errorMsg, setErrorMsg] = useState('')
   const token = useSelector(selectAccessToken)
   const refreshUser = useRefreshUser()
-  const handleSubmit: FormEventHandler<HTMLFormElement> = async(e) => {
+  const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
     let body = JSON.stringify({ email })
     const { error } = await fetcher({
       url: 'http://localhost:3500/users/addContact',
       method: 'POST',
       body,
-      accessToken : 'Bearer ' + token.accessToken
+      accessToken: 'Bearer ' + token.accessToken,
     })
     if (error === null) {
       await refreshUser()
       return
     }
     setEmail('')
-    let msg = RegExp('Bad').test(error) ? error : 'Something went wrong'
+    let msg = RegExp('Bad').test(error) ? 'User not founded' : 'Something went wrong'
     setErrorMsg(msg as string)
     setTimeout(() => {
       setErrorMsg('')
     }, 3500)
-
   }
   return (
     <form onSubmit={handleSubmit} className="min_form">
-      <span >Email contact</span>
+      <span>Email contact</span>
       <input
         type="email"
         name="email"

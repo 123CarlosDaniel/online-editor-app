@@ -20,14 +20,16 @@ export default function NewRoom() {
       url: 'http://localhost:3500/room/create',
       method: 'POST',
       body,
-      accessToken : 'Bearer ' + token.accessToken
+      accessToken: 'Bearer ' + token.accessToken,
     })
     if (error === null) {
       await refreshUser()
       navigate(`/panel`)
       return
     }
-    let msg = RegExp('Bad').test(error) ? error : 'Something went wrong'
+    let msg = RegExp('Bad').test(error)
+      ? 'Room name already used'
+      : 'Something went wrong'
     setErrorMsg(msg as string)
     setTimeout(() => {
       setErrorMsg('')

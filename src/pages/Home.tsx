@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux'
 import { selectAccessToken } from '../features/auth/authSlice'
 import { Link } from 'react-router-dom'
-import './Home.css'
 
 export default function Home() {
   const { accessToken } = useSelector(selectAccessToken)
@@ -26,7 +25,7 @@ export default function Home() {
         <Link className="button" to={'/panel'}>
           Panel
         </Link>
-        {(!accessToken) ? (
+        {!accessToken ? (
           <>
             <Link className="button" to={'/login'}>
               Login

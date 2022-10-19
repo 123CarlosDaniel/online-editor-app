@@ -7,31 +7,30 @@ import fetcher from '../utils/fetcher'
 export default function AccessRoom() {
   const [errorMsg, setErrorMsg] = useState('')
   const [email, setEmail] = useState('')
-  const params = useParams()  //:roomId
+  const params = useParams() //:roomId
   const navigate = useNavigate()
   const token = useSelector(selectAccessToken)
 
-  const handleSubmit:FormEventHandler<HTMLFormElement>  = async(e)=>{
+  const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
 
-    let body = JSON.stringify({email, roomId : params.roomId})
+    let body = JSON.stringify({ email, roomId: params.roomId })
     const { data, error } = await fetcher({
       url: 'http://localhost:3500/room/access',
       method: 'POST',
       body,
-      accessToken : 'Bearer ' + token.accessToken
+      accessToken: 'Bearer ' + token.accessToken,
     })
     if (error === null) {
       navigate(`/panel`)
       return
     }
-    let msg = RegExp('Bad').test(error) ? error : 'Something went wrong'
+    let msg = RegExp('Bad').test(error) ? 'User not founded' : 'Something went wrong'
     setErrorMsg(msg as string)
     setTimeout(() => {
       setErrorMsg('')
     }, 3500)
-
-  } 
+  }
   return (
     <div className="Layout">
       <h2>Give access to a contact</h2>
@@ -42,7 +41,7 @@ export default function AccessRoom() {
           name="email"
           value={email}
           placeholder="Enter the email of a contact"
-          onChange={(e)=>setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <button type="submit">Send</button>
         {errorMsg !== '' && <h2 className="errorMessage">{errorMsg}</h2>}

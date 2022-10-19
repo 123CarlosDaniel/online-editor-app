@@ -38,12 +38,13 @@ export default function Iframe({
   jsEditor,
 }: IframeProps) {
   const iframeRef = useRef() as RefObject<HTMLIFrameElement>
-  const debouncerEditor = debouncer(()=>{
+  const debouncerEditor = debouncer(() => {
     const html = htmlEditor!.getValue()
     const css = cssEditor!.getValue()
     const js = jsEditor!.getValue()
-    const codePreview = createHtml({html,css,js})
-    iframeRef.current?.setAttribute("srcDoc", codePreview)},500)
+    const codePreview = createHtml({ html, css, js })
+    iframeRef.current?.setAttribute('srcDoc', codePreview)
+  }, 500)
 
   useEffect(() => {
     debouncerEditor()
@@ -51,7 +52,7 @@ export default function Iframe({
     cssEditor!.onDidChangeModelContent(debouncerEditor)
     jsEditor!.onDidChangeModelContent(debouncerEditor)
   }, [])
-  
+
   return (
     <iframe ref={iframeRef} srcDoc="">
       Iframe

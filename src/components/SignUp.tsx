@@ -1,7 +1,7 @@
 import { ChangeEventHandler, FormEventHandler, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import fetcher, { DataI } from '../utils/fetcher'
-import {useDispatch} from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { setAuth } from '../features/auth/authSlice'
 import { setUser } from '../features/user/userSlice'
 
@@ -15,26 +15,23 @@ export default function SignUp() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-
-  const handleSubmit: FormEventHandler<HTMLFormElement> = async(e) => {
+  const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
     let body = JSON.stringify(values)
-    const {data,error} = await fetcher<DataI>({
+    const { data, error } = await fetcher<DataI>({
       url: 'http://localhost:3500/auth/register',
-      method:'POST',
+      method: 'POST',
       body,
     })
 
-    if (error===null) {
-      dispatch(setAuth({accessToken:data.token}))
+    if (error === null) {
+      dispatch(setAuth({ accessToken: data.token }))
       const user = data.user
       dispatch(setUser(user))
       navigate('/panel')
       return
     }
-    console.log(data)
-    let msg = RegExp('Bad').test(error)? 'Email is already used' : error
-    console.log({msg})
+    let msg = RegExp('Bad').test(error) ? 'Email is already used' : error
     setErrorMsg(msg as string)
     setTimeout(() => {
       setErrorMsg('')

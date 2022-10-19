@@ -1,5 +1,4 @@
 
-
 export default function debouncer(func:Function,msWait:number){
   let timeout :number
   return function(...args:any){

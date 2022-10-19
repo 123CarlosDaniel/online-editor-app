@@ -1,7 +1,7 @@
 import { io, Socket } from 'socket.io-client'
-import EditorMonaco from '../components/EditorMonaco' 
+import EditorMonaco from '../components/EditorMonaco'
 import { useEffect, useRef, useState } from 'react'
-import Iframe from '../components/Iframe' 
+import Iframe from '../components/Iframe'
 import { editor } from 'monaco-editor'
 import { useParams } from 'react-router-dom'
 
@@ -17,7 +17,7 @@ function EditorPage() {
   const params = useParams()
   useEffect(() => {
     const roomName = params.roomName
-    
+
     socket.current = io('http://localhost:3500')
     socket.current.on('connect', () => {
       console.log('you connected with id:', socket.current!.id)
@@ -41,7 +41,7 @@ function EditorPage() {
             socketClient={isConnected ? socket.current : null}
             isConnected={isConnected}
             editorRef={HtmlRef}
-            setMounted = {setIsHtmlMounted}
+            setMounted={setIsHtmlMounted}
           />
         </div>
         <div className="editorElement">
@@ -50,7 +50,7 @@ function EditorPage() {
             socketClient={isConnected ? socket.current : null}
             isConnected={isConnected}
             editorRef={JsRef}
-            setMounted = {setIsJsMounted}
+            setMounted={setIsJsMounted}
           />
         </div>
         <div className="editorElement">
@@ -59,15 +59,17 @@ function EditorPage() {
             socketClient={isConnected ? socket.current : null}
             isConnected={isConnected}
             editorRef={CssRef}
-            setMounted = {setIsCssMounted}
+            setMounted={setIsCssMounted}
           />
         </div>
         <div className="editorElement">
-          { (isHtmlMounted && isCssMounted && isJsMounted) && <Iframe
-            htmlEditor={HtmlRef.current}
-            cssEditor={CssRef.current}
-            jsEditor={JsRef.current}
-          /> }
+          {isHtmlMounted && isCssMounted && isJsMounted && (
+            <Iframe
+              htmlEditor={HtmlRef.current}
+              cssEditor={CssRef.current}
+              jsEditor={JsRef.current}
+            />
+          )}
         </div>
       </div>
     </div>
