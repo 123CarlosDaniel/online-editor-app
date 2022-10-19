@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
   gap: 4rem;
+  padding: 0 2rem;
 }
 
 .panel_information > div {
@@ -29,9 +30,13 @@
   justify-content: space-evenly;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 875px) {
   .panel_information {
     flex-direction: column;
     gap: 2rem;
+    padding-bottom: 2rem;
+  }
+  .panel_information > div {
+    align-items: center;
   }
 }

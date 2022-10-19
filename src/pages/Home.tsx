@@ -1,26 +1,13 @@
 import { useSelector } from 'react-redux'
 import { selectAccessToken } from '../features/auth/authSlice'
 import { Link } from 'react-router-dom'
+import Sample from '../assets/sample-editor.webm'
 
 export default function Home() {
   const { accessToken } = useSelector(selectAccessToken)
   return (
     <div className="Layout">
       <h2>Welcome to my app</h2>
-      <div className="home_content">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste
-        distinctio sapiente odio voluptatum veritatis sint praesentium, ab
-        consectetur, officia, placeat dolores nesciunt architecto. Esse culpa
-        nisi quam, rerum doloribus nulla quod amet velit, veritatis aliquam
-        minus dolorem molestias distinctio consequuntur commodi obcaecati
-        asperiores provident voluptates delectus ipsum quis doloremque natus!
-        Nisi sunt voluptatibus corporis odit necessitatibus repellendus ipsa
-        quae quasi aspernatur? Cupiditate assumenda, et officia inventore
-        dignissimos quas quisquam odio quos minima impedit libero est quo harum
-        aliquam perspiciatis corrupti provident tempore rerum placeat quod aut
-        voluptatem beatae esse unde? Iure, rem enim! Nobis sit non ullam dicta
-        quisquam illo.
-      </div>
       <div className="button_container">
         <Link className="button" to={'/panel'}>
           Panel
@@ -36,6 +23,31 @@ export default function Home() {
           </>
         ) : null}
       </div>
+
+      <div className="home_content">
+        <h3>Online Editor</h3>
+        <p>
+          This app is a code editor like vs-code, but you can code in real time
+          with your friends.
+        </p>
+        <div className="video_container">
+        <video src={Sample} controls></video>
+      </div>
+        <h4>How to use it ? </h4>
+        <p>
+          To use my app, you need to create an account{' '}
+          <Link to={'/signup'} className="link">
+            here
+          </Link>
+          , then you will redirect to your panel, there will be nothing since
+          you have not yet created a room. So create a room, and you will
+          redirect again to your panel, but there will be a room created, click
+          in join and start coding. <br />
+          To start collabarating with your friends you need to add a him as a
+          contact and give him access.
+        </p>
+      </div>
+      
       <div className="home_content">
         To see more projects visit my portfolio{' '}
         <a

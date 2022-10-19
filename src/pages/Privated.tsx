@@ -35,7 +35,7 @@ export default function Privated() {
         console.log(err)
       })
   }, [])
-
+  
   return isLoading ? (
     <Loader />
   ) : allowed ? (
