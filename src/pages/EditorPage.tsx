@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import Iframe from '../components/Iframe'
 import { editor } from 'monaco-editor'
 import { useParams } from 'react-router-dom'
+import { serverRoute } from '../api/api'
 
 function EditorPage() {
   const socket = useRef<Socket | null>(null)
@@ -18,13 +19,13 @@ function EditorPage() {
   useEffect(() => {
     const roomName = params.roomName
 
-    socket.current = io('http://localhost:3500')
+    socket.current = io(serverRoute)
     socket.current.on('connect', () => {
       console.log('you connected with id:', socket.current!.id)
     })
     socket.current?.emit('join_room', roomName, setIsConnected)
     return () => {
-      socket.current?.emit('exit')
+      socket.current?.emit('exit',roomName)
       setIsConnected(false)
       setIsHtmlMounted(false)
       setIsCssMounted(false)

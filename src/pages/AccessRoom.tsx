@@ -1,6 +1,7 @@
 import { FormEventHandler, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
+import { accessRoomRoute } from '../api/api'
 import { selectAccessToken } from '../features/auth/authSlice'
 import fetcher from '../utils/fetcher'
 
@@ -16,7 +17,7 @@ export default function AccessRoom() {
 
     let body = JSON.stringify({ email, roomId: params.roomId })
     const { data, error } = await fetcher({
-      url: 'http://localhost:3500/room/access',
+      url: accessRoomRoute,
       method: 'POST',
       body,
       accessToken: 'Bearer ' + token.accessToken,

@@ -43,7 +43,7 @@ export default function Home() {
           you have not yet created a room. So create a room, and you will
           redirect again to your panel, but there will be a room created, click
           in join and start coding. <br />
-          To start collabarating with your friends you need to add a him as a
+          To start collabarating with your friends you need to add him as a
           contact and give him access.
         </p>
       </div>

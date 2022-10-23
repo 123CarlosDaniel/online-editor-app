@@ -1,5 +1,6 @@
 import { FormEventHandler, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { addContactRoute } from '../api/api'
 import { selectAccessToken } from '../features/auth/authSlice'
 import useRefreshUser from '../hooks/useRefreshUser'
 import fetcher from '../utils/fetcher'
@@ -13,7 +14,7 @@ export default function AddContact() {
     e.preventDefault()
     let body = JSON.stringify({ email })
     const { error } = await fetcher({
-      url: 'http://localhost:3500/users/addContact',
+      url: addContactRoute,
       method: 'POST',
       body,
       accessToken: 'Bearer ' + token.accessToken,

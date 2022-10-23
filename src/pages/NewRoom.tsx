@@ -1,6 +1,7 @@
 import { FormEventHandler, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
+import { createRoomRoute } from '../api/api'
 import LogoutButton from '../components/LogoutButton'
 import { selectAccessToken } from '../features/auth/authSlice'
 import useRefreshUser from '../hooks/useRefreshUser'
@@ -17,7 +18,7 @@ export default function NewRoom() {
     e.preventDefault()
     let body = JSON.stringify({ name: value })
     const { data, error } = await fetcher<RoomI>({
-      url: 'http://localhost:3500/room/create',
+      url: createRoomRoute,
       method: 'POST',
       body,
       accessToken: 'Bearer ' + token.accessToken,

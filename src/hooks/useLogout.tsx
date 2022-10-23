@@ -1,4 +1,5 @@
 import { useDispatch } from 'react-redux'
+import { logoutRoute } from '../api/api'
 import { setAuth } from '../features/auth/authSlice'
 
 export default function useLogout() {
@@ -7,7 +8,7 @@ export default function useLogout() {
   const logout = async () => {
     dispatch(setAuth({ accessToken: '' }))
     try {
-      const res = await fetch('http://localhost:3500/logout', {
+      const res = await fetch(logoutRoute, {
         credentials: 'include',
       })
       if (!res.ok) {

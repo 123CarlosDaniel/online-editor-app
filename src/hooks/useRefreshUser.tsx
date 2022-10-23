@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
+import { userGetRoute } from '../api/api'
 import { selectAccessToken } from '../features/auth/authSlice'
 import { setUser } from '../features/user/userSlice'
 
@@ -7,7 +8,7 @@ export default function useRefreshUser() {
   const accessToken = token.accessToken
   const dispatch = useDispatch()
   const refresh = async (token = accessToken) => {
-    const res = await fetch('http://localhost:3500/users', {
+    const res = await fetch(userGetRoute, {
       credentials: 'include',
       headers: {
         Authorization: 'Bearer ' + token,

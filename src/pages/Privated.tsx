@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Navigate, Outlet, useParams } from 'react-router-dom'
+import { verifyUserRoute } from '../api/api'
 import Loader from '../components/Loader'
 import { selectAccessToken } from '../features/auth/authSlice'
 
@@ -13,7 +14,7 @@ export default function Privated() {
   if (params.roomId === path) path = '?id=' + path
   if (params.roomName === path) path = '?name=' + path
   useEffect(() => {
-    fetch(`http://localhost:3500/room/verify${path}`, {
+    fetch(`${verifyUserRoute}${path}`, {
       headers: {
         Authorization: 'Bearer ' + auth.accessToken,
         'Content-Type': 'application/json',

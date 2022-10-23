@@ -4,6 +4,7 @@ import fetcher, { DataI } from '../utils/fetcher'
 import { useDispatch } from 'react-redux'
 import { setAuth } from '../features/auth/authSlice'
 import { setUser } from '../features/user/userSlice'
+import { registerUserRoute } from '../api/api'
 
 export default function SignUp() {
   const [values, setValues] = useState({
@@ -19,7 +20,7 @@ export default function SignUp() {
     e.preventDefault()
     let body = JSON.stringify(values)
     const { data, error } = await fetcher<DataI>({
-      url: 'http://localhost:3500/auth/register',
+      url: registerUserRoute,
       method: 'POST',
       body,
     })
