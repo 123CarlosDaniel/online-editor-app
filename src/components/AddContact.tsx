@@ -4,14 +4,17 @@ import { addContactRoute } from '../api/api'
 import { selectAccessToken } from '../features/auth/authSlice'
 import useRefreshUser from '../hooks/useRefreshUser'
 import fetcher from '../utils/fetcher'
+import LoaderInline from './LoaderInline'
 
 export default function AddContact() {
   const [email, setEmail] = useState('')
   const [errorMsg, setErrorMsg] = useState('')
+  const [loading, setLoading] = useState(false)
   const token = useSelector(selectAccessToken)
   const refreshUser = useRefreshUser()
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
+    setLoading(true)
     let body = JSON.stringify({ email })
     const { error } = await fetcher({
       url: addContactRoute,
@@ -21,10 +24,12 @@ export default function AddContact() {
     })
     if (error === null) {
       await refreshUser()
+      setLoading(false)
       return
     }
     setEmail('')
     let msg = RegExp('Bad').test(error) ? 'User not founded' : 'Something went wrong'
+    setLoading(false)
     setErrorMsg(msg as string)
     setTimeout(() => {
       setErrorMsg('')
@@ -44,6 +49,7 @@ export default function AddContact() {
       <button type="submit" className="sm">
         Add contact
       </button>
+      {loading && <LoaderInline/>}
       {errorMsg !== '' && <h2 className="errorMessage">{errorMsg}</h2>}
     </form>
   )

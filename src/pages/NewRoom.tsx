@@ -2,6 +2,7 @@ import { FormEventHandler, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { createRoomRoute } from '../api/api'
+import LoaderInline from '../components/LoaderInline'
 import LogoutButton from '../components/LogoutButton'
 import { selectAccessToken } from '../features/auth/authSlice'
 import useRefreshUser from '../hooks/useRefreshUser'
@@ -10,12 +11,14 @@ import fetcher, { RoomI } from '../utils/fetcher'
 export default function NewRoom() {
   const [value, setValue] = useState('')
   const [errorMsg, setErrorMsg] = useState('')
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
   const token = useSelector(selectAccessToken)
   const refreshUser = useRefreshUser()
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
+    setLoading(true)
     let body = JSON.stringify({ name: value })
     const { data, error } = await fetcher<RoomI>({
       url: createRoomRoute,
@@ -25,12 +28,14 @@ export default function NewRoom() {
     })
     if (error === null) {
       await refreshUser()
+      setLoading(false)
       navigate(`/panel`)
       return
     }
     let msg = RegExp('Bad').test(error)
       ? 'Room name already used'
       : 'Something went wrong'
+    setLoading(false)
     setErrorMsg(msg as string)
     setTimeout(() => {
       setErrorMsg('')
@@ -60,6 +65,7 @@ export default function NewRoom() {
             required
           />
           <button type="submit">Create</button>
+          { loading && <LoaderInline/>}
           {errorMsg !== '' && <h2 className="errorMessage">{errorMsg}</h2>}
         </form>
       </div>
