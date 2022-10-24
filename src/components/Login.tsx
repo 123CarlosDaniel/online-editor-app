@@ -5,18 +5,21 @@ import { useDispatch } from 'react-redux'
 import { setAuth } from '../features/auth/authSlice'
 import { setUser } from '../features/user/userSlice'
 import { loginUserRoute } from '../api/api'
+import LoaderInline from './LoaderInline'
 
 export default function Login() {
   const [values, setValues] = useState({
     email: '',
     password: '',
   })
+  const [loading, setLoading] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
+    setLoading(true)
     let body = JSON.stringify(values)
     const { data, error } = await fetcher<DataI>({
       method: 'POST',
@@ -24,6 +27,7 @@ export default function Login() {
       body,
     })
     if (error === null) {
+      setLoading(false)
       dispatch(setAuth({ accessToken: data.token }))
       const user = data.user
       dispatch(setUser(user))
@@ -31,6 +35,7 @@ export default function Login() {
       return
     }
     let msg = RegExp('Bad').test(error) ? 'Incorrect credentials' : 'Something went wrong'
+    setLoading(false)
     setErrorMsg(msg as string)
     setTimeout(() => {
       setErrorMsg('')
@@ -77,6 +82,7 @@ export default function Login() {
       <Link className="link" to={'/'}>
         Go back to home
       </Link>
+      { loading && <LoaderInline/>}
       {errorMsg !== '' && <h2 className="errorMessage">{errorMsg}</h2>}
     </form>
   )

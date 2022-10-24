@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { setAuth } from '../features/auth/authSlice'
 import { setUser } from '../features/user/userSlice'
 import { registerUserRoute } from '../api/api'
+import LoaderInline from './LoaderInline'
 
 export default function SignUp() {
   const [values, setValues] = useState({
@@ -12,12 +13,14 @@ export default function SignUp() {
     email: '',
     password: '',
   })
+  const [loading, setLoading] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
+    setLoading(true)
     let body = JSON.stringify(values)
     const { data, error } = await fetcher<DataI>({
       url: registerUserRoute,
@@ -26,6 +29,7 @@ export default function SignUp() {
     })
 
     if (error === null) {
+      setLoading(false)
       dispatch(setAuth({ accessToken: data.token }))
       const user = data.user
       dispatch(setUser(user))
@@ -33,6 +37,7 @@ export default function SignUp() {
       return
     }
     let msg = RegExp('Bad').test(error) ? 'Email is already used' : error
+    setLoading(false)
     setErrorMsg(msg as string)
     setTimeout(() => {
       setErrorMsg('')
@@ -90,6 +95,7 @@ export default function SignUp() {
       <Link className="link" to={'/'}>
         Go back to home
       </Link>
+      { loading && <LoaderInline/>}
       {errorMsg !== '' && <h2 className="errorMessage">{errorMsg}</h2>}
     </form>
   )
